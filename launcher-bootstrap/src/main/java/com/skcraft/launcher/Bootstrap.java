@@ -200,7 +200,7 @@ public class Bootstrap {
     }
 
     private static boolean isPortableMode() {
-        return new File("portable.txt").exists();
+        return true;
     }
 
 
