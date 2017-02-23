@@ -325,6 +325,23 @@ public final class Launcher {
     }
 
     /**
+     * Get the packages news.
+     *
+     * @return the packages news URL
+     */
+    public URL getPackagesNewsURL(String key, String installed, String updateNeeded) {
+        try {
+            return HttpRequest.url(
+                    String.format(getProperties().getProperty("packageNewsUrl"),
+                            URLEncoder.encode(key, "UTF-8"),
+                            URLEncoder.encode(installed, "UTF-8"),
+                            URLEncoder.encode(updateNeeded, "UTF-8")));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * Convenient method to fetch a property.
      *
      * @param key the key

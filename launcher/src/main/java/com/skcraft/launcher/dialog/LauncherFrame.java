@@ -14,6 +14,7 @@ import com.skcraft.launcher.launch.LaunchListener;
 import com.skcraft.launcher.launch.LaunchOptions;
 import com.skcraft.launcher.launch.LaunchOptions.UpdatePolicy;
 import com.skcraft.launcher.swing.*;
+import com.skcraft.launcher.util.HttpRequest;
 import com.skcraft.launcher.util.SharedLocale;
 import com.skcraft.launcher.util.SwingExecutor;
 import lombok.Getter;
@@ -136,6 +137,41 @@ public class LauncherFrame extends JFrame {
                 webView.browse(launcher.getNewsURL(), false);
             }
         });
+
+		instancesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent event) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent event) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent event) {
+                int index = instancesTable.rowAtPoint(event.getPoint());
+                if (index >= 0) {
+                    instancesTable.setRowSelectionInterval(index, index);
+                    Instance selected = launcher.getInstances().get(index);
+                    String selectedName = "" + selected.getTitle();
+                    String selectedVersion = "" + selected.getVersion();
+                    String isInstalled = "" + selected.isInstalled();
+                    String updateNeeded = "" + selected.isUpdatePending();
+					System.out.println("clicked on table " + selectedName);
+					System.out.println("selectedVersion " + selected.getVersion());
+					System.out.println("getTitle " + selected.getTitle());
+					System.out.println("Resulting URL " + launcher.getPackagesNewsURL(selectedName, isInstalled, updateNeeded)); 
+                    webView.browse(launcher.getPackagesNewsURL(selectedName, isInstalled, updateNeeded), false); 
+                }
+			}
+			@Override
+			public void mouseEntered(MouseEvent event) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent event) {
+			}
+		});
 
         selfUpdateButton.addActionListener(new ActionListener() {
             @Override
