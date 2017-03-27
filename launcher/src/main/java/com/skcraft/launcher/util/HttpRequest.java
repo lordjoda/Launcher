@@ -112,7 +112,7 @@ public class HttpRequest implements Closeable, ProgressObservable {
             openConnection(url);
 
 
-            inputStream = (conn.getResponseCode() == HttpURLConnection.HTTP_OK||conn.getResponseCode()==307) ?
+            inputStream = conn.getResponseCode() == HttpURLConnection.HTTP_OK ?
                     conn.getInputStream() : conn.getErrorStream();
 
             successful = true;
