@@ -22,9 +22,15 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
+import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
